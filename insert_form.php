@@ -4,31 +4,31 @@ require_once("customer_function.php");
 session_start();
 
 $isEdit = false;
-// 🔹 ตรวจสอบว่ามีการส่งค่า action ผ่าน URL และค่าของ action คือ "edit" หรือไม่
+//  ตรวจสอบว่ามีการส่งค่า action ผ่าน URL และค่าของ action คือ "edit" หรือไม่
 if (isset($_GET['action']) && $_GET['action'] == "edit") 
 {
     $isEdit = true;
     $id = $_GET['id'];
 
-    // 🔹 เรียกฟังก์ชัน getCustomerById() เพื่อดึงข้อมูลลูกค้าจากฐานข้อมูล ตาม id ที่ส่งมา
+    
     $allcustomers = getCustomerById($id);
 
-    // 🔹 ตรวจสอบว่าพบข้อมูลลูกค้าอย่างน้อย 1 รายการ
+   
     if (count($allcustomers) > 0) {
 
-        // 🔹 ดึงข้อมูลลูกค้าแถวแรกจากผลลัพธ์ (เพราะ getCustomerById() อาจคืนค่าเป็น array ของหลายแถว)
+        //  ดึงข้อมูลลูกค้าแถวแรกจากผลลัพธ์ 
         $cust = $allcustomers[0];
 
-        // 🔹 ดึงค่าชื่อ-นามสกุล-เบอร์โทร-อีเมล จาก array ของลูกค้า
+        // ดึงค่าชื่อ-นามสกุล-เบอร์โทร-อีเมล จาก array ของลูกค้า
         $name    = $cust['name'];
         $surname = $cust['surname'];
         $phone   = $cust['phone'];
         $email   = $cust['email'];
 
-        // 🔹 ตั้งอายุคุกกี้ (1 วัน = 60 วินาที * 60 นาที * 24 ชั่วโมง)
+        // ตั้งอายุคุกกี้ (1 วัน = 60 วินาที * 60 นาที * 24 ชั่วโมง)
         //$expiry_time = time() + (60 * 60 * 24);
 
-        // 🔹 สร้าง/อัปเดตคุกกี้ เพื่อเก็บข้อมูลลูกค้าไว้ชั่วคราว
+        //  สร้าง/อัปเดตคุกกี้ เพื่อเก็บข้อมูลลูกค้าไว้ชั่วคราว
         //   เช่น ใช้ในกรณีกรอกฟอร์มผิดพลาด แล้วจะดึงค่ากลับมาแสดงอีกครั้ง
        // setcookie("name", $name, $expiry_time, "/");
         //setcookie("surname", $surname, $expiry_time, "/");
@@ -40,8 +40,8 @@ if (isset($_GET['action']) && $_GET['action'] == "edit")
         $_SESSION['phone']   = $phone;
         $_SESSION['email']   = $email;
 
-        // 🔹 อัปเดตตัวแปร $_COOKIE ในหน้านี้โดยตรง
-        //   เพื่อให้สามารถเข้าถึงค่าคุกกี้ได้ทันที (ปกติคุกกี้จะใช้ได้ใน request ถัดไป)
+        // อัปเดตตัวแปร $_COOKIE ในหน้านี้โดยตรง
+        //  เพื่อให้สามารถเข้าถึงค่าคุกกี้ได้ทันที (ปกติคุกกี้จะใช้ได้ใน request ถัดไป)
         //$_COOKIE["name"] = $name;
         //$_COOKIE["surname"] = $surname;
         //$_COOKIE["phone"] = $phone;
@@ -122,4 +122,5 @@ if (isset($_GET['action']) && $_GET['action'] == "edit")
 
 
   </body>
+
 </html>
