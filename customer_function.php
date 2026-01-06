@@ -5,8 +5,8 @@ function createMysqlConnection()
     // 🔹 ข้อมูลเชื่อมต่อฐานข้อมูล
     $servername = "localhost";
     $username   = "root";
-    $password   = "";          // รหัสผ่านของ root ใน XAMPP มักเป็นค่าว่าง
-    $dbname     = "php_crud";  // ตรวจสอบชื่อฐานข้อมูลอีกครั้งว่าถูกต้องหรือไม่
+    $password   = "";          
+    $dbname     = "php_crud"; 
 
     // 🔹 สร้างการเชื่อมต่อ
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -30,7 +30,7 @@ function insertNewCustomer($name, $surname, $phone, $email)
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssss", $name, $surname, $phone, $email);   
 
-    // ✅ ประกาศตัวแปรและกำหนดค่าเริ่มต้น
+    // ประกาศตัวแปรและกำหนดค่าเริ่มต้น
     $isSuccess = false; 
     
     if ($stmt->execute() === TRUE) 
@@ -40,7 +40,7 @@ function insertNewCustomer($name, $surname, $phone, $email)
     } else 
     {
         // หากเกิดข้อผิดพลาด ให้แสดงข้อความผิดพลาด
-        echo "❌ Error: " . $sql . "<br>" . $conn->error;
+        echo " Error: " . $sql . "<br>" . $conn->error;
     }
 
     // ปิดการเชื่อมต่อ
@@ -76,7 +76,7 @@ function getAllCustomer()
             echo "0 results";
         }
 
-    // 🔹 ปิดการเชื่อมต่อ
+    //  ปิดการเชื่อมต่อ
     $conn->close();
     return $allcustomers;
 }
@@ -112,7 +112,7 @@ function searchCustomerByName($name_search)
             echo "0 results";
         }
 
-    // 🔹 ปิดการเชื่อมต่อ
+    
     $conn->close();
     $stmt->close();
     return $allcustomers;
@@ -150,7 +150,7 @@ function getCustomerById($id)
             echo "0 results";
         }
 
-    // 🔹 ปิดการเชื่อมต่อ
+   
     $conn->close();
     $stmt->close();
     return $allcustomers;
@@ -160,7 +160,7 @@ function deletecustomer($id)
 {
     $conn = createMysqlConnection();
     
-    // **ป้องกัน SQL Injection เบื้องต้น (แนะนำให้ใช้ Prepared Statements)**
+    // **ป้องกัน SQL Injection 
     $id_safe = $conn->real_escape_string($id); 
 
     $sql = "DELETE FROM customers WHERE id = ?" ;
@@ -174,8 +174,8 @@ function deletecustomer($id)
         return true; // ส่งค่า true กลับไป
     } else 
     {
-        // หากล้มเหลว: แสดง Error เพื่อช่วยในการดีบัก (Debugger) 
-        echo "❌ Error: " . $sql . "<br>" . $conn->error;
+        // หากล้มเหลว: แสดง  Error 
+        echo " Error: " . $sql . "<br>" . $conn->error;
         $conn->close();
         $stmt->close();
         return false; // ส่งค่า false กลับไป
@@ -197,7 +197,7 @@ function updateCustomer($id,$name, $surname, $phone, $email)
     echo $sql."<br/>";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssi", $name, $surname, $phone, $email, $id); 
-    // ✅ ประกาศตัวแปรและกำหนดค่าเริ่มต้น
+    // ประกาศตัวแปรและกำหนดค่าเริ่มต้น
     $isSuccess = false; 
     
     if ($stmt->execute() === TRUE) 
@@ -207,7 +207,7 @@ function updateCustomer($id,$name, $surname, $phone, $email)
     } else 
     {
         // หากเกิดข้อผิดพลาด ให้แสดงข้อความผิดพลาด
-        echo "❌ Error: " . $sql . "<br>" . $conn->error;
+        echo " Error: " . $sql . "<br>" . $conn->error;
     }
 
     // ปิดการเชื่อมต่อ
@@ -220,4 +220,5 @@ function updateCustomer($id,$name, $surname, $phone, $email)
 
 
 ?>
+
 
