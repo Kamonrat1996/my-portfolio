@@ -1,5 +1,5 @@
 <?php
-      // ✅ เรียกใช้ไฟล์ฟังก์ชันสำหรับจัดการข้อมูลลูกค้า
+     
       require_once("customer_function.php");
 
     ?>
@@ -58,4 +58,5 @@
     </br>
     <a href="index.html">back</a>
     </body>
+
     </html>
